@@ -10,8 +10,7 @@ const createImagesList = galleryItems.map(image =>
     <img src="${image.preview}
     "alt="${image.description}"
     class="gallery__image"
-    data-source="${image.original}">
-  </li>`).join("");
+    data-source="${image.original}">`).join("");
 refs.gallery.insertAdjacentHTML("beforeend", createImagesList);
 
 refs.gallery.addEventListener('click', onOpenLargeImg);
