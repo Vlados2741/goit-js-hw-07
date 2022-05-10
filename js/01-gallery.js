@@ -21,17 +21,23 @@ function onOpenLargeImg(e) {
   }
     e.preventDefault();
 
-    console.log(e.target.dataset.source)
-  const largeImgLink = e.target.dataset.source;
-    const instance = basicLightbox.create
-        (`<img src="${largeImgLink}" alt="${e.target.alt}">`);
-   
-    const onCloseModalImage = e => {
-        if (e.code === `Escape`) {
-            instance.close();
-        };
+  console.log(e.target.dataset.source)
+  const onCloseModalImage = e => {
+    if (e.code === `Escape`) {
+        instance.close();
     };
-    window.addEventListener(`keydown`, onCloseModalImage);
+  };
+  const largeImgLink = e.target.dataset.source;
+  const instance = basicLightbox.create
+    (`<img src="${largeImgLink}" alt="${e.target.alt}">`,
+  {
+    onShow: () => {
+      window.addEventListener(`keydown`, onCloseModalImage);
+    },
+    onClose: () => {
+      window.removeEventListener(`keydown`, onCloseModalImage);
+    },
+  });
   instance.show();
 }
 
